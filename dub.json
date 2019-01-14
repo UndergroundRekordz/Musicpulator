@@ -1,0 +1,17 @@
+{
+	"authors": [
+		"Jacob Jensen"
+	],
+	"license": "The MIT License (MIT)",
+	"copyright": "Copyright © 2019 Underground Rekordz",
+	"name": "musicpulator",
+	"sourcePaths": ["source"],
+	"description": "A library for manipulating and analyzing musical scores in D.",
+	"homepage": "https://undergroundrekordz.com/",
+	"targetType": "sourceLibrary",
+	"version": "0.0.1",
+	"configurations": [{
+		"targetType": "sourceLibrary",
+		"name": "library"
+	}]
+}
