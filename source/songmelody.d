@@ -111,6 +111,11 @@ final class SongMelody
   */
   void appendNote(SongNote note)
   {
+    if (!note)
+    {
+      return;
+    }
+
     _notes ~= note;
 
     _foundScale = false;
@@ -141,7 +146,7 @@ final class SongMelody
     _foundProgression = false;
   }
 
-  /// Converts the melody to a string. This will call toJSon().
+  /// Converts the melody to a string. This will call toJson().
   override string toString()
   {
     return toJson();
