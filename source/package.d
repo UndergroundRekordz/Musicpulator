@@ -11,4 +11,19 @@ public
   import musicpulator.direction;
   import musicpulator.melodies;
   import musicpulator.chords;
+
+  import musicpulator.musicalnote;
+  import musicpulator.musicalprogression;
+  import musicpulator.musicalscale;
+
+  import musicpulator.song;
+  import musicpulator.songpart;
+  import musicpulator.songtrack;
+  import musicpulator.songchord;
+  import musicpulator.songchordentry;
+  import musicpulator.songmelody;
+  import musicpulator.songsequence;
+  import musicpulator.songnote;
+
+  import musicpulator.tools;
 }
