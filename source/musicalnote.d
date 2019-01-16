@@ -6,7 +6,7 @@
 module musicpulator.musicalnote;
 
 /// Enumeration around music notes.
-enum MusicalNote
+enum MusicalNote : string
 {
   /// The Cb note.
   cFlat = "Cb",

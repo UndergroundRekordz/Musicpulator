@@ -265,3 +265,102 @@ MusicalNote[] translateToNaturalNotes(MusicalScaleNote[] scaleNotes)
 
   return notes;
 }
+
+/**
+* Gets the musical scale based on its scale name.
+*/
+MusicalScale getScale(MusicalScaleName scaleName)
+{
+  import std.array : split;
+
+  auto data = (cast(string)scaleName).split(" ");
+  auto note = cast(MusicalNote)data[0];
+  auto type = cast(MusicalScaleType)data[1];
+
+  return new MusicalScale(scaleName, note, type);
+}
+
+/**
+* Finds the best matching scales based on a set of given notes.
+* Params:
+*   notes =          The notes to match into a scale.
+*   unorderedMatch = Boolean determining whether the matching is unordered or not. This is false by default.
+*/
+MusicalScale[] findScales(MusicalNote[] notes, bool unorderedMatch = false)
+{
+  import std.traits : EnumMembers;
+  import std.algorithm : canFind;
+
+  if (!notes || !notes.length)
+  {
+    return null;
+  }
+
+  bool[MusicalNote] noteMap;
+  MusicalNote[] uniqueNotes;
+
+  foreach (note; notes)
+  {
+    if (!noteMap || note !in noteMap)
+    {
+      uniqueNotes ~= note;
+
+      noteMap[note] = true;
+    }
+  }
+
+  notes = uniqueNotes;
+
+  MusicalScale[] currentMatch;
+  size_t currentMatchingNotes;
+
+  static foreach (scaleName; [EnumMembers!MusicalScaleName])
+  {{
+    auto scale = getScale(scaleName);
+
+    if (scale)
+    {
+      auto scaleNotes = scale.getNaturalNotes();
+      size_t matching;
+
+      if (unorderedMatch)
+      {
+        foreach (note; notes)
+        {
+          if (scaleNotes.canFind(note))
+          {
+            matching++;
+          }
+        }
+      }
+      else
+      {
+        auto length = notes.length > scaleNotes.length ? scaleNotes.length : notes.length;
+
+        foreach (i; 0 .. length)
+        {
+          if (scaleNotes[i] != notes[i])
+          {
+            break;
+          }
+          else
+          {
+            matching++;
+          }
+        }
+      }
+
+      if (matching > currentMatchingNotes)
+      {
+        currentMatch = [scale];
+        currentMatchingNotes = matching;
+      }
+      else if (matching == currentMatchingNotes)
+      {
+        currentMatch ~= scale;
+      }
+    }
+  }}
+
+  return currentMatch;
+}

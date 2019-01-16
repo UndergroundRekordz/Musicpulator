@@ -5,14 +5,23 @@
 */
 module musicpulator.songmelody;
 
+import musicpulator.songnote;
+import musicpulator.musicalscale;
+
 /// Wrapper around a song melody.
 final class SongMelody
 {
   private:
+  MusicalScale _scale;
 
   public:
   final:
   this()
+  {
+
+  }
+
+  @property
   {
 
   }
