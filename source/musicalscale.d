@@ -10,11 +10,6 @@ import std.string : format;
 import musicpulator.musicalnote;
 import musicpulator.tools;
 
-/// A set of incrementers used to calculate major scales in western music.
-static const majorIncrementers = [2,2,1,2,2,2];
-/// A set of incrementers used to calculate minor scales in western music.
-static const minorIncrementers = [2,1,2,2,1,2];
-
 /// Enumeration of scale names.
 enum MusicalScaleName : string
 {
@@ -138,14 +133,14 @@ final class MusicalScaleNote
   /// Converts the scale note to json.
   string toJson()
   {
-    return `{"note":%s,"octaveIncrementer":%s}`
+    return `{"note":%s,"octaveIncrementer":%d}`
       .format(_note.toJson(), _octaveIncrementer);
   }
 
   /// Converts the scale note to xml.
   string toXml()
   {
-    return `<ScaleNote note="%s" octaveIncrementer="%s" />`
+    return `<ScaleNote note="%s" octaveIncrementer="%d" />`
       .format(_note.toXml(), _octaveIncrementer);
   }
 }
