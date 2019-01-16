@@ -10,15 +10,18 @@ import std.array : array, join;
 import std.string : format;
 
 import musicpulator.songnote;
+import musicpulator.songchord;
 import musicpulator.musicalscale;
 import musicpulator.tools;
+import musicpulator.core;
+import musicpulator.constants;
 
 /// Wrapper around a song chord entry.
 final class SongChordEntry
 {
   private:
   /// The notes.
-  SongNote[] _notes;
+  InternaleCollection!SongNote _notes;
   /// The length.
   size_t _length;
   /// The bar.
@@ -27,6 +30,8 @@ final class SongChordEntry
   MusicalScale[] _scales;
   /// Boolean determining whether the chord entry has found its scale or not yet.
   bool _foundScale;
+  /// The parent chord.
+  SongChord _parentChord;
 
   public:
   final:
@@ -45,6 +50,18 @@ final class SongChordEntry
   /**
   * Creates a new chord entry.
   * Params:
+  *   parentChord = The parent chord.
+  *   length = The length.
+  */
+  this(size_t length, SongChord parentChord)
+  {
+    _length = length;
+    _parentChord = parentChord;
+  }
+
+  /**
+  * Creates a new chord entry.
+  * Params:
   *   length = The length.
   *   bar =    The bar.
   *   notes =  The notes.
@@ -53,32 +70,129 @@ final class SongChordEntry
   {
     _length = length;
     _bar = bar;
-    _notes = notes;
+
+    if (notes && notes.length)
+    {
+      foreach (note; notes.map!(n => new SongNote(n.note, n.step, n.octave, this)))
+      {
+        _notes.add(note);
+      }
+    }
+  }
+
+  /**
+  * Creates a new chord entry.
+  * Params:
+  *   length = The length.
+  *   notes =       The notes.
+  *   parentChord = The parent chord.
+  */
+  this(size_t length, SongNote[] notes, SongChord parentChord)
+  {
+    _length = length;
+    _parentChord = parentChord;
+
+    if (notes && notes.length)
+    {
+      foreach (note; notes.map!(n => new SongNote(n.note, n.step, n.octave, this)))
+      {
+        _notes.add(note);
+      }
+    }
   }
 
   @property
   {
     /// Gets the notes of the chord entry.
-    const(SongNote[]) notes() { return _notes; }
+    InternaleCollection!SongNote notes() { return _notes; }
 
     /// Gets the scales of the chord entry.
     const(MusicalScale[]) scales()
     {
-      if (!_foundScale)
-      {
-        _foundScale = true;
+      return scalesInternal();
+    }
 
-        _scales = findScales(_notes.map!(n => n.note).array);
+    package(musicpulator)
+    {
+      MusicalScale[] scalesInternal()
+      {
+        if (!_foundScale)
+        {
+          _foundScale = true;
+
+          _scales = findScales(_notes.map!(n => n.note).array);
+        }
+
+        return _scales;
+      }
+    }
+
+    /// Sets the length of the chord entry.
+    void length(size_t newLength)
+    {
+      size_t maxLength = songBarSize;
+
+      if (_parentChord && _parentChord.entries.length)
+      {
+        maxLength = songBarSize / _parentChord.entries.length;
       }
 
-      return _scales;
+      if (newLength > maxLength)
+      {
+        newLength = maxLength;
+      }
+      else if (newLength == 0)
+      {
+        newLength = 1;
+      }
+
+      _length = newLength;
     }
 
     /// Gets the length of the chord entry.
-    size_t length() { return _length; }
+    size_t length()
+    {
+      size_t maxLength = songBarSize;
+
+      if (_parentChord && _parentChord.entries.length)
+      {
+        maxLength = songBarSize / _parentChord.entries.length;
+      }
+
+      if (_length > maxLength)
+      {
+        _length = maxLength;
+      }
+      else if (_length == 0)
+      {
+        _length = 1;
+      }
+
+      return _length;
+    }
 
     /// Gets the bar of the chord entry.
-    size_t bar() { return _bar; }
+    size_t bar()
+    {
+      if (_parentChord)
+      {
+        return _parentChord.bar;
+      }
+
+      return _bar;
+    }
+
+    /// Gets the parent chord.
+    SongChord parentChord() { return _parentChord; }
+
+    package(musicpulator)
+    {
+      /// Sets the parent chord.
+      void parentChord(SongChord chord)
+      {
+        _parentChord = chord;
+      }
+    }
   }
 
   /**
@@ -95,7 +209,7 @@ final class SongChordEntry
 
     note.parentChordEntry = this;
 
-    _notes ~= note;
+    _notes.add(note);
 
     _foundScale = false;
   }
@@ -140,7 +254,7 @@ final class SongChordEntry
   {
     auto noteXml = "";
 
-    if (_notes && _notes.length)
+    if (_notes.length)
     {
       noteXml = _notes.map!(n => n.toXml()).array.join;
     }

@@ -26,4 +26,5 @@ public
   import musicpulator.songnote;
 
   import musicpulator.tools;
+  import musicpulator.core;
 }

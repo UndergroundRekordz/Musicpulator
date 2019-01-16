@@ -13,6 +13,10 @@ import musicpulator.songnote;
 import musicpulator.musicalscale;
 import musicpulator.musicalprogression;
 import musicpulator.tools;
+import musicpulator.core;
+
+/// Alias for the note collection.
+private alias NoteCollection = InternalMaxSizeCollection!(SongNote, 32);
 
 /// Wrapper around a song melody.
 final class SongMelody
@@ -27,7 +31,7 @@ final class SongMelody
   /// Boolean determining whether the melody has found its progression or not yet.
   bool _foundProgression;
   /// The notes of the melody.
-  SongNote[] _notes;
+  NoteCollection _notes;
 
   public:
   final:
@@ -40,7 +44,10 @@ final class SongMelody
   {
     if (notes && notes.length)
     {
-      _notes = notes.map!(n => new SongNote(n.note, n.length, n.step, n.octave, n.bar)).array;
+      foreach (note; notes.map!(n => new SongNote(n.note, n.length, n.step, n.octave, n.bar)))
+      {
+        _notes.add(note);
+      }
     }
   }
 
@@ -53,7 +60,7 @@ final class SongMelody
   @property
   {
     /// Gets the notes of the melody.
-    const(SongNote[]) notes() { return _notes; }
+    NoteCollection notes() { return _notes; }
 
     /// Gets the scales of the melody.
     const(MusicalScale[]) scales()
@@ -116,7 +123,7 @@ final class SongMelody
       return;
     }
 
-    _notes ~= note;
+    _notes.add(note);
 
     _foundScale = false;
     _foundProgression = false;
@@ -164,7 +171,7 @@ final class SongMelody
   {
     auto noteXml = "";
 
-    if (_notes && _notes.length)
+    if (_notes.length)
     {
       noteXml = _notes.map!(n => n.toXml()).array.join;
     }

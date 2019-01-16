@@ -99,7 +99,15 @@ final class SongNote
     size_t octave() { return _octave; }
 
     /// Gets the bar.
-    size_t bar() { return _bar; }
+    size_t bar()
+    {
+      if (_parentChordEntry)
+      {
+        return _parentChordEntry.bar;
+      }
+
+      return _bar;
+    }
 
     /// Gets the parent chord entry.
     SongChordEntry parentChordEntry() { return _parentChordEntry; }
