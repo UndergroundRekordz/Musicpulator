@@ -5,26 +5,34 @@
 */
 module musicpulator.notes;
 
+import musicpulator.musicalnote;
+
 /// Collection of notes and base ids.
-static immutable(ptrdiff_t[string]) noteBaseIds;
+static immutable(ptrdiff_t[MusicalNote]) noteBaseIds;
 
 /// Static constructor for the module.
 static this()
 {
   noteBaseIds =
   [
-    "c" : 0,
-    "c#": 1,
-    "d": 2,
-    "d#": 3,
-    "e": 4,
-    "f": 5,
-    "f#": 6,
-    "g": 7,
-    "g#": 8,
-    "a": 9,
-    "a#": 10,
-    "b": 11
+    MusicalNote.c : 0,
+    MusicalNote.cSharp : 1,
+    MusicalNote.dFlat : 1,
+    MusicalNote.d : 2,
+    MusicalNote.dSharp : 3,
+    MusicalNote.eFlat : 3,
+    MusicalNote.e : 4,
+    MusicalNote.f : 5,
+    MusicalNote.fSharp : 6,
+    MusicalNote.gFlat : 6,
+    MusicalNote.g : 7,
+    MusicalNote.gSharp : 8,
+    MusicalNote.aFlat : 8,
+    MusicalNote.a : 9,
+    MusicalNote.aSharp : 10,
+    MusicalNote.bFlat : 10,
+    MusicalNote.b : 11,
+    MusicalNote.cFlat : 11
   ];
 }
 
@@ -55,7 +63,7 @@ struct NoteId
 * Returns:
 *   Returns the id for a note relative to the specific octave.
 */
-NoteId getNoteId(string note, ptrdiff_t octave)
+NoteId getNoteId(MusicalNote note, ptrdiff_t octave)
 {
   import std.string : toLower;
 
@@ -64,7 +72,7 @@ NoteId getNoteId(string note, ptrdiff_t octave)
     return invalidNoteId;
   }
 
-  auto noteIndex = noteBaseIds.get(note.toLower, -1);
+  auto noteIndex = noteBaseIds.get(note, -1);
 
   if (noteIndex == -1)
   {

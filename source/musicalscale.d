@@ -172,6 +172,18 @@ final class MusicalScale
     _type = type;
   }
 
+  @property
+  {
+    /// Gets the scale name.
+    MusicalScaleName scale() { return _scale; }
+
+    /// Gets the name.
+    MusicalNote note() { return _note; }
+
+    /// Gets the type.
+    MusicalScaleType type() { return _type; }
+  }
+
   /// Gets a set of natural notes within the scale.
   MusicalNote[] getNaturalNotes()
   {

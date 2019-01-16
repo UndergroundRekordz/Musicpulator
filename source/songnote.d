@@ -89,13 +89,13 @@ final class SongNote
   string toJson()
   {
     return `{"note":%s,"length":%d,"step":%d,"relativeStep":%d,"octave":%d,"bar":%d}`
-      .format(_note, _length, _step, relativeStep, _octave, _bar);
+      .format(cast(string)_note, _length, _step, relativeStep, _octave, _bar);
   }
 
   /// Converts the note to xml.
   string toXml()
   {
-    return `<SongNote note="%s" length="%d" step="%d" relativeStep="%d" octave="%d" />`
-      .format(_note, _length, _step, relativeStep, _octave, _bar);
+    return `<SongNote note="%s" length="%d" step="%d" relativeStep="%d" octave="%d" bar="%d" />`
+      .format(cast(string)_note, _length, _step, relativeStep, _octave, _bar);
   }
 }
