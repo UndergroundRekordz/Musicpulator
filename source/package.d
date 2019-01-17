@@ -24,6 +24,7 @@ public
   import musicpulator.songmelody;
   import musicpulator.songsequence;
   import musicpulator.songnote;
+  import musicpulator.songautomation;
 
   import musicpulator.tools;
   import musicpulator.core;

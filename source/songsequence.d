@@ -102,7 +102,7 @@ final class SongSequence
   string toJson()
   {
     return `{"note":%s,"bar":%d,"octave":%d,"sequenceEntry":%s}`
-      .format(_note, bar, _octave, _entries);
+      .format(_note.toJson(), bar, _octave, _entries);
   }
 
   /// Converts the sequence to xml.
@@ -115,7 +115,7 @@ final class SongSequence
       entryXml = _entries.map!(e => format(`<SequenceEntry length="%d" />`, e)).array.join;
     }
 
-    return `<SongSequence note="" bar="" octave="">%s</SongSequence>`
+    return `<SongSequence note="%s" bar="%d" octave="%d">%s</SongSequence>`
       .format(_note, bar, _octave, entryXml);
   }
 }
