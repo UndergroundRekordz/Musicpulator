@@ -5,7 +5,8 @@
 */
 module musicpulator.songchord;
 
-import std.algorithm : map;
+import std.algorithm : map, joiner;
+import std.array : array, join;
 import std.string : format;
 
 import musicpulator.tools;
@@ -132,18 +133,30 @@ final class SongChord
     _entries.add(entry);
   }
 
+  /// Converts the chord to a string. This will call toJson().
   override string toString()
   {
     return toJson();
   }
 
+  /// Converts the chord to json.
   string toJson()
   {
-    return "{}";
+    return `{"bar":%d,"positiveHarmonics":%d,"negativeHarmonics":%d,"chordEntries":%s}`
+      .format(_bar, _positiveHarmonics, _negativeHarmonics, _entries.map!(e => e.toJson()).joiner(",").array);
   }
 
+  /// Converts the chord to xml.
   string toXml()
   {
-    return "";
+    auto entryXml = "";
+
+    if (_entries.length)
+    {
+      entryXml = _entries.map!(e => e.toXml()).array.join;
+    }
+
+    return `<SongChord bar="%d" positiveHarmonics="%d" negativeHarmonics="%d">%s</SongChord>`
+      .format(_bar, _positiveHarmonics, _negativeHarmonics, entryXml);
   }
 }

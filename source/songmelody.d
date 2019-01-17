@@ -93,9 +93,6 @@ final class SongMelody
           noteIds ~= getNoteId(note.note, note.octave);
         }
 
-        import std.stdio : writeln;
-        writeln(noteIds);
-
         if (noteIds && noteIds.length)
         {
           auto directions = getNoteDirections(noteIds);

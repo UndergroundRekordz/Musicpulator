@@ -51,11 +51,13 @@ final class SongChordEntry
   * Creates a new chord entry.
   * Params:
   *   parentChord = The parent chord.
-  *   length = The length.
+  *   length =      The length.
+  *   bar =         The bar.
   */
-  this(size_t length, SongChord parentChord)
+  this(size_t length, size_t bar, SongChord parentChord)
   {
     _length = length;
+    _bar = bar;
     _parentChord = parentChord;
   }
 
@@ -83,13 +85,15 @@ final class SongChordEntry
   /**
   * Creates a new chord entry.
   * Params:
-  *   length = The length.
+  *   length =      The length.
+  *   bar =         The bar.
   *   notes =       The notes.
   *   parentChord = The parent chord.
   */
-  this(size_t length, SongNote[] notes, SongChord parentChord)
+  this(size_t length, size_t bar, SongNote[] notes, SongChord parentChord)
   {
     _length = length;
+    _bar = bar;
     _parentChord = parentChord;
 
     if (notes && notes.length)
@@ -176,10 +180,16 @@ final class SongChordEntry
     {
       if (_parentChord)
       {
-        return _parentChord.bar;
+        return _parentChord.bar + _bar;
       }
 
       return _bar;
+    }
+
+    /// Sets the bar of the chord entry.
+    void bar(size_t newBar)
+    {
+      _bar = newBar;
     }
 
     /// Gets the parent chord.
@@ -246,7 +256,7 @@ final class SongChordEntry
   string toJson()
   {
     return `{"notes":%s,"scales":%s,"length":%d,"bar":%d}`
-      .format(_notes.map!(n => n.toJson()).joiner(",").array, scales ? _scales.map!(s => s.toJson()).joiner(",").array : [], _length, _bar);
+      .format(_notes.map!(n => n.toJson()).joiner(",").array, scales ? _scales.map!(s => s.toJson()).joiner(",").array : [], length, bar);
   }
 
   /// Converts the chord entry to xml.
@@ -266,7 +276,7 @@ final class SongChordEntry
       scaleXml = _scales.map!(s => s.toXml()).array.join;
     }
 
-    return `<SongMelody length="%d" bar="%d"><SongNotes>%s</SongNotes><Scales>%s</Scales></SongMelody>`
-      .format(_length, _bar, noteXml, scaleXml);
+    return `<SongChordEntry length="%d" bar="%d"><SongNotes>%s</SongNotes><Scales>%s</Scales></SongChordEntry>`
+      .format(length, bar, noteXml, scaleXml);
   }
 }
