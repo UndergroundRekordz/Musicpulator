@@ -5,7 +5,7 @@
 */
 module musicpulator.songchordentry;
 
-import std.algorithm : map, joiner;
+import std.algorithm : map, joiner, sum;
 import std.array : array, join;
 import std.string : format;
 
@@ -21,7 +21,7 @@ final class SongChordEntry
 {
   private:
   /// The notes.
-  InternaleCollection!SongNote _notes;
+  InternalCollection!SongNote _notes;
   /// The length.
   size_t _length;
   /// The bar.
@@ -108,7 +108,7 @@ final class SongChordEntry
   @property
   {
     /// Gets the notes of the chord entry.
-    InternaleCollection!SongNote notes() { return _notes; }
+    InternalCollection!SongNote notes() { return _notes; }
 
     /// Gets the scales of the chord entry.
     const(MusicalScale[]) scales()
@@ -118,6 +118,7 @@ final class SongChordEntry
 
     package(musicpulator)
     {
+      /// Gets an array of the musical scales internally in the project. Used to escape const.
       MusicalScale[] scalesInternal()
       {
         if (!_foundScale)
@@ -160,7 +161,16 @@ final class SongChordEntry
 
       if (_parentChord && _parentChord.entries.length)
       {
-        maxLength = songBarSize / _parentChord.entries.length;
+        auto sumSize = _parentChord.entries.map!(e => e._length).sum;
+
+        if (sumSize >= 32)
+        {
+          maxLength = 0;
+        }
+        else
+        {
+          maxLength = songBarSize - sumSize;
+        }
       }
 
       if (_length > maxLength)

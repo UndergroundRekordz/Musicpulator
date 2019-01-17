@@ -106,7 +106,7 @@ struct MaxSizeCollection(T, size_t initMaxSize = 0)
 }
 
 /// A collection that can only be modified within the package.
-struct InternaleCollection(T)
+struct InternalCollection(T)
 {
   private:
   /// The collection.
