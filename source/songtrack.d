@@ -12,6 +12,9 @@ import musicpulator.songautomation;
 import musicpulator.songchord;
 import musicpulator.songmelody;
 import musicpulator.songsequence;
+import musicpulator.songpart;
+import musicpulator.musicalscale;
+import musicpulator.musicalprogression;
 
 /// Alias for a float automation.
 private alias FloatAutomation = SongAutomation!float;
@@ -43,6 +46,8 @@ final class SongTrack
   string[string] _metaData;
   /// The meta-automation.
   FloatAutomation[string] _metaAutomation;
+  /// The parent part.
+  SongPart _parentPart;
 
   this()
   {
@@ -54,6 +59,11 @@ final class SongTrack
 
   public:
   final:
+  /**
+  * Creates a new track.
+  * Params:
+  *   chord = The chord.
+  */
   this(SongChord chord)
   {
     this();
@@ -61,6 +71,11 @@ final class SongTrack
     _chord = chord;
   }
 
+  /**
+  * Creates a new track.
+  * Params:
+  *   melody = The melody.
+  */
   this(SongMelody melody)
   {
     this();
@@ -68,6 +83,11 @@ final class SongTrack
     _melody = melody;
   }
 
+  /**
+  * Creates a new track.
+  * Params:
+  *   sequence = The sequence.
+  */
   this(SongSequence sequence)
   {
     this();
@@ -131,8 +151,31 @@ final class SongTrack
     /// Gets the name of the track.
     string name() { return _name; }
 
+    /// Sets the name of the track.
+    void name(string newName)
+    {
+      _name = newName;
+    }
+
     /// Gets the bar of the track.
     size_t bar() { return _bar; }
+
+    /// Gets the relative bar.
+    size_t relativeBar()
+    {
+      if (_parentPart)
+      {
+        return _parentPart.bar + _bar;
+      }
+
+      return _bar;
+    }
+
+    /// Sets the bar of the track.
+    void bar(size_t newBar)
+    {
+      _bar = newBar;
+    }
 
     /// Gets the volume of the track.
     FloatAutomation volume() { return _volume; }
@@ -145,6 +188,34 @@ final class SongTrack
 
     /// Gets the wetness of the track.
     FloatAutomation wet() { return _wet; }
+
+    /// Gets the scales of the track.
+    const(MusicalScale[][]) scales()
+    {
+      if (_chord) return _chord.scales;
+      else if (_melody) return [_melody.scales];
+      else return null;
+    }
+
+    /// Gets the progression of the track.
+    MusicalProgression progression()
+    {
+      if (!_melody) return MusicalProgression.none;
+
+      return _melody.progression;
+    }
+
+    /// Gets the parent part.
+    SongPart parentPart() { return _parentPart; }
+
+    package(musicpulator)
+    {
+      /// Sets the parent part.
+      void parentPart(SongPart newPart)
+      {
+        _parentPart = newPart;
+      }
+    }
   }
 
   /**
@@ -255,12 +326,12 @@ final class SongTrack
       metaAutomationEntry ~= "}";
     }
 
-    return `{"chord":%s,"melody":%s,"sequence":%s,"name":%s,"bar":%d,"volume":%s,"velocity":%s,"dry":%s,"wet":%s,"metaData":%s,"metaAutomation":%s}`
+    return `{"chord":%s,"melody":%s,"sequence":%s,"name":%s,"bar":%d,"relativeBar":%d,"volume":%s,"velocity":%s,"dry":%s,"wet":%s,"metaData":%s,"metaAutomation":%s}`
       .format(
         _chord ? _chord.toJson() : "null",
         _melody ? _melody.toJson() : "null",
         _sequence ? _sequence.toJson() : "null",
-        _name ? _name : "null", _bar,
+        _name ? ("\"" ~ _name ~ "\"") : "null", _bar, relativeBar,
         _volume.toJson(), _velocity.toJson(),
         _dry.toJson(), _wet.toJson(),
         metaDataEntry, metaAutomationEntry
@@ -298,9 +369,9 @@ final class SongTrack
       metaAutomationEntry ~= "</SongMetaAutomation>";
     }
 
-    return `<SongTrack name="%s" bar="%d">%s%s%s %s%s%s%s %s %s</SongTrack>`
+    return `<SongTrack name="%s" bar="%d" relativeBar="%d">%s%s%s %s%s%s%s %s %s</SongTrack>`
       .format(
-        _name ? _name : "", _bar,
+        _name ? _name : "", _bar, relativeBar,
         _chord ? _chord.toXml() : "",
         _melody ? _melody.toXml() : "",
         _sequence ? _sequence.toXml() : "",

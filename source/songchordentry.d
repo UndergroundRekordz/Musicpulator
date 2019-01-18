@@ -265,8 +265,36 @@ final class SongChordEntry
   /// Converts the chord entry to json.
   string toJson()
   {
+    auto notesJson = "[";
+
+    if (_notes.length)
+    {
+      foreach (note; _notes)
+      {
+        notesJson ~= note.toJson() ~ ",";
+      }
+
+      notesJson.length -= 1;
+    }
+
+    notesJson ~= "]";
+
+    auto scalesJson = "[";
+
+    if (scales && _scales.length)
+    {
+      foreach (scale; _scales)
+      {
+        scalesJson ~= scale.toJson() ~ ",";
+      }
+
+      scalesJson.length -= 1;
+    }
+
+    scalesJson ~= "]";
+
     return `{"notes":%s,"scales":%s,"length":%d,"bar":%d}`
-      .format(_notes.map!(n => n.toJson()).joiner(",").array, scales ? _scales.map!(s => s.toJson()).joiner(",").array : [], length, bar);
+      .format(notesJson, scalesJson, length, bar);
   }
 
   /// Converts the chord entry to xml.

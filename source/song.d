@@ -32,36 +32,6 @@ final class Song
     return _parts ? _parts.get(title, null) : null;
   }
 
-  MusicalScale[] getScales()
-  {
-    MusicalScale[] scales;
-
-    if (_parts && _parts.length)
-    {
-      foreach (part; _parts.values)
-      {
-        scales ~= part.getScales();
-      }
-    }
-
-    return scales;
-  }
-
-  MusicalProgression[] getProgressions()
-  {
-    MusicalProgression[] progressions;
-
-    if (_parts && _parts.length)
-    {
-      foreach (part; _parts.values)
-      {
-        progressions ~= part.getProgressions();
-      }
-    }
-
-    return progressions;
-  }
-
   override string toString()
   {
     return toJson();

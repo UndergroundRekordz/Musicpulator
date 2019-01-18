@@ -5,8 +5,14 @@
 */
 module musicpulator.songpart;
 
+import std.algorithm : map, joiner;
+import std.array : array, join;
+import std.string : format;
+
 import musicpulator.musicalscale;
 import musicpulator.musicalprogression;
+import musicpulator.songtrack;
+import musicpulator.core;
 
 /// Enumeration of song part titles.
 enum SongPartTitle : string
@@ -109,26 +115,58 @@ enum SongPartTitle : string
 final class SongPart
 {
   private:
+  /// The title of the song part.
+  SongPartTitle _title;
+  /// The bar of the song part.
+  size_t _bar;
+  /// The tracks of the song part.
+  InternalCollection!SongTrack _tracks;
 
   public:
   final:
-  this()
+  /**
+  * Creates a new song part.
+  * Params:
+  *   title = The title.
+  */
+  this(SongPartTitle title)
   {
-
+    _title = title;
   }
 
-  MusicalScale[] getScales()
+  @property
   {
-    MusicalScale[] scales;
+    /// Gets the title of the song part.
+    SongPartTitle title() { return _title; }
 
-    return scales;
+    /// Gets the bar of the song part.
+    size_t bar() { return _bar; }
+
+    /// Sets the bar of the song part.
+    void bar(size_t newBar)
+    {
+      _bar = newBar;
+    }
+
+    /// Gets the tracks of the song part.
+    InternalCollection!SongTrack tracks() { return _tracks; }
   }
 
-  MusicalProgression[] getProgressions()
+  /**
+  * Adds a track to the song part.
+  * Params:
+  *   track = The track to add.
+  */
+  void addTrack(SongTrack track)
   {
-    MusicalProgression[] progressions;
+    if (!track)
+    {
+      return;
+    }
 
-    return progressions;
+    track.parentPart = this;
+
+    _tracks.add(track);
   }
 
   override string toString()
@@ -138,11 +176,34 @@ final class SongPart
 
   string toJson()
   {
-    return "{}";
+    auto tracksJson = "[";
+
+    if (_tracks.length)
+    {
+      foreach (track; _tracks)
+      {
+        tracksJson ~= track.toJson() ~ ",";
+      }
+
+      tracksJson.length -= 1;
+    }
+
+    tracksJson ~= "]";
+
+    return `{"tracks":%s,"title": "%s", "bar": %d}`
+      .format(tracksJson, cast(string)_title, _bar);
   }
 
   string toXml()
   {
-    return "";
+    auto tracksXml = "";
+
+    if (_tracks.length)
+    {
+      tracksXml = _tracks.map!(t => t.toXml()).array.join;
+    }
+
+    return `<SongPart title="%s" bar="%d">%s</SongPart>`
+      .format(cast(string)_title, _bar, tracksXml);
   }
 }

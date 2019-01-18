@@ -445,10 +445,10 @@ final class MusicalScale
       notes ~= scaleNote.toJson() ~ ",";
     }
 
-    notes.length--;
+    notes.length -= 1;
     notes ~= "]";
 
-    return `{"scale":"%s","note":"%s","type":"%s" "notes":%s}`
+    return `{"scale":"%s","note":"%s","type":"%s","notes":%s}`
       .format(_scale, _note, _type, notes);
   }
 
