@@ -29,6 +29,12 @@ final class Song
     _name = name;
   }
 
+  @property
+  {
+    /// Gets the parts of a song.
+    auto parts() { return _parts.values; }
+  }
+
   /**
   * Adds a part to the song.
   * Params:

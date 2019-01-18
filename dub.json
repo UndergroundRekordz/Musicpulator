@@ -9,7 +9,6 @@
 	"description": "A library for manipulating and analyzing musical scores in D.",
 	"homepage": "https://undergroundrekordz.com/",
 	"targetType": "sourceLibrary",
-	"version": "0.0.1",
 	"configurations": [{
 		"targetType": "sourceLibrary",
 		"name": "library"
