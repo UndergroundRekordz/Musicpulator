@@ -169,11 +169,13 @@ final class SongPart
     _tracks.add(track);
   }
 
+  /// Converts the song part to string. Calls toJson().
   override string toString()
   {
     return toJson();
   }
 
+  /// Converts the song part to json.
   string toJson()
   {
     auto tracksJson = "[";
@@ -194,6 +196,7 @@ final class SongPart
       .format(tracksJson, cast(string)_title, _bar);
   }
 
+  /// Converts the song part to xml.
   string toXml()
   {
     auto tracksXml = "";
