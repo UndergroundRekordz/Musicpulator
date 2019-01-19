@@ -29,6 +29,7 @@ Simply add the following to your dub.json (Or the equivalent in dub.sdl)
 		"musicpulator": "~>0.0.2"
 }
 ```
+
 ## Contributing
 
 If you wish to contribute to the project simply follow these steps:
@@ -40,6 +41,69 @@ If you wish to contribute to the project simply follow these steps:
 Please keep pull-requests to a single change and follow the coding style as much as you can.
 
 All contributions are appreciated.
+
+## Issues / Help
+
+Head over to our [**Issue Tab**](https://github.com/UndergroundRekordz/Musicpulator/issues) if you need help, got questions or have any issues with Musicpulator.
+
+## Example Program
+
+```
+module main;
+
+import std.file : write;
+
+import musicpulator;
+
+void main()
+{
+  auto chord = new SongChord(4,1,1);
+
+  auto chordEntry = new SongChordEntry
+  (
+    16,
+    2,
+    [
+        new SongNote(MusicalNote.a, 8, 0,5, 0),
+        new SongNote(MusicalNote.e, 8, 8, 5, 0),
+        new SongNote(MusicalNote.cSharp, 8, 16, 5, 0),
+        new SongNote(MusicalNote.b, 8, 24, 4, 0)
+    ],
+    chord
+  );
+
+  chord.addChordEntry(chordEntry);
+
+  auto sequence = new SongSequence(MusicalNote.eFlat, 10, 5, [2,4,8,99]);
+
+  auto track = new SongTrack(sequence);
+  track.setMetaData("bpm", 140);
+  track.setMetaAutomation("bpm", 0.5, 0);
+  track.velocity.value = 0.6;
+  track.wet.addValue(0.7);
+  track.wet.addValue(0.75);
+
+  auto part = new SongPart(SongPartTitle.chorus);
+  part.addTrack(track);
+  part.addTrack(track);
+  part.addTrack(track);
+
+  auto tack2 = new SongTrack(chord);
+  tack2.name = "Strings";
+  tack2.wet.addValue(0.5);
+  tack2.wet.addValue(0.7);
+  tack2.wet.addValue(0.8);
+  tack2.velocity.addValue(0.5);
+  tack2.velocity.addValue(0.75);
+  part.addTrack(tack2);
+
+  auto song = new Song("My song");
+  song.addPart(part);
+
+  write("test.json", song.toJson());
+  write("test.xml", song.toXml());
+}
+```
 
 ## Example Usage (Analyzation)
 
