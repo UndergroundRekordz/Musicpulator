@@ -355,7 +355,7 @@ final class SongTrack
       metaDataEntry ~= "</SongMetaData>";
     }
 
-    string metaAutomationEntry = "null";
+    string metaAutomationEntry = "";
 
     if (_metaAutomation && _metaAutomation.length)
     {

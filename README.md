@@ -105,6 +105,511 @@ void main()
 }
 ```
 
+### Json Result:
+
+```
+{
+   "name":"My song",
+   "parts":[
+      {
+         "tracks":[
+            {
+               "chord":null,
+               "melody":null,
+               "sequence":{
+                  "note":"Eb",
+                  "bar":10,
+                  "octave":5,
+                  "sequenceEntry":[
+                     2,
+                     4,
+                     8,
+                     18
+                  ]
+               },
+               "name":null,
+               "bar":0,
+               "relativeBar":0,
+               "volume":{
+                  "name":"Volume",
+                  "value":1,
+                  "values":[
+                     1
+                  ]
+               },
+               "velocity":{
+                  "name":"Velocity",
+                  "value":0.6,
+                  "values":[
+                     0.6
+                  ]
+               },
+               "dry":{
+                  "name":"Dry",
+                  "value":0,
+                  "values":[
+                     0
+                  ]
+               },
+               "wet":{
+                  "name":"Wet",
+                  "value":0,
+                  "values":[
+                     0,
+                     0.7,
+                     0.75
+                  ]
+               },
+               "metaData":{
+                  "bpm":"140"
+               },
+               "metaAutomation":{
+                  "bpm":{
+                     "name":"bpm",
+                     "value":0.5,
+                     "values":[
+                        0.5
+                     ]
+                  }
+               }
+            },
+            {
+               "chord":null,
+               "melody":null,
+               "sequence":{
+                  "note":"Eb",
+                  "bar":10,
+                  "octave":5,
+                  "sequenceEntry":[
+                     2,
+                     4,
+                     8,
+                     18
+                  ]
+               },
+               "name":null,
+               "bar":0,
+               "relativeBar":0,
+               "volume":{
+                  "name":"Volume",
+                  "value":1,
+                  "values":[
+                     1
+                  ]
+               },
+               "velocity":{
+                  "name":"Velocity",
+                  "value":0.6,
+                  "values":[
+                     0.6
+                  ]
+               },
+               "dry":{
+                  "name":"Dry",
+                  "value":0,
+                  "values":[
+                     0
+                  ]
+               },
+               "wet":{
+                  "name":"Wet",
+                  "value":0,
+                  "values":[
+                     0,
+                     0.7,
+                     0.75
+                  ]
+               },
+               "metaData":{
+                  "bpm":"140"
+               },
+               "metaAutomation":{
+                  "bpm":{
+                     "name":"bpm",
+                     "value":0.5,
+                     "values":[
+                        0.5
+                     ]
+                  }
+               }
+            },
+            {
+               "chord":null,
+               "melody":null,
+               "sequence":{
+                  "note":"Eb",
+                  "bar":10,
+                  "octave":5,
+                  "sequenceEntry":[
+                     2,
+                     4,
+                     8,
+                     18
+                  ]
+               },
+               "name":null,
+               "bar":0,
+               "relativeBar":0,
+               "volume":{
+                  "name":"Volume",
+                  "value":1,
+                  "values":[
+                     1
+                  ]
+               },
+               "velocity":{
+                  "name":"Velocity",
+                  "value":0.6,
+                  "values":[
+                     0.6
+                  ]
+               },
+               "dry":{
+                  "name":"Dry",
+                  "value":0,
+                  "values":[
+                     0
+                  ]
+               },
+               "wet":{
+                  "name":"Wet",
+                  "value":0,
+                  "values":[
+                     0,
+                     0.7,
+                     0.75
+                  ]
+               },
+               "metaData":{
+                  "bpm":"140"
+               },
+               "metaAutomation":{
+                  "bpm":{
+                     "name":"bpm",
+                     "value":0.5,
+                     "values":[
+                        0.5
+                     ]
+                  }
+               }
+            },
+            {
+               "chord":{
+                  "bar":4,
+                  "positiveHarmonics":1,
+                  "negativeHarmonics":1,
+                  "chordEntries":{
+                     "notes":[
+                        {
+                           "note":"A",
+                           "length":16,
+                           "step":0,
+                           "relativeStep":192,
+                           "octave":5,
+                           "bar":6
+                        },
+                        {
+                           "note":"E",
+                           "length":16,
+                           "step":8,
+                           "relativeStep":200,
+                           "octave":5,
+                           "bar":6
+                        },
+                        {
+                           "note":"C#",
+                           "length":16,
+                           "step":16,
+                           "relativeStep":208,
+                           "octave":5,
+                           "bar":6
+                        },
+                        {
+                           "note":"B",
+                           "length":16,
+                           "step":24,
+                           "relativeStep":216,
+                           "octave":4,
+                           "bar":6
+                        }
+                     ],
+                     "scales":[
+                        {
+                           "scale":"aMajor",
+                           "note":"a",
+                           "type":"major",
+                           "notes":[
+                              {
+                                 "note":"A",
+                                 "octaveIncrementer":0
+                              },
+                              {
+                                 "note":"B",
+                                 "octaveIncrementer":0
+                              },
+                              {
+                                 "note":"C#",
+                                 "octaveIncrementer":1
+                              },
+                              {
+                                 "note":"D",
+                                 "octaveIncrementer":1
+                              },
+                              {
+                                 "note":"E",
+                                 "octaveIncrementer":1
+                              },
+                              {
+                                 "note":"F#",
+                                 "octaveIncrementer":1
+                              },
+                              {
+                                 "note":"G#",
+                                 "octaveIncrementer":1
+                              }
+                           ]
+                        },
+                        {
+                           "scale":"aMinor",
+                           "note":"a",
+                           "type":"minor",
+                           "notes":[
+                              {
+                                 "note":"A",
+                                 "octaveIncrementer":0
+                              },
+                              {
+                                 "note":"B",
+                                 "octaveIncrementer":0
+                              },
+                              {
+                                 "note":"C",
+                                 "octaveIncrementer":0
+                              },
+                              {
+                                 "note":"D",
+                                 "octaveIncrementer":0
+                              },
+                              {
+                                 "note":"E",
+                                 "octaveIncrementer":0
+                              },
+                              {
+                                 "note":"F",
+                                 "octaveIncrementer":0
+                              },
+                              {
+                                 "note":"G",
+                                 "octaveIncrementer":0
+                              }
+                           ]
+                        }
+                     ],
+                     "length":16,
+                     "bar":6
+                  }
+               },
+               "melody":null,
+               "sequence":null,
+               "name":"Strings",
+               "bar":0,
+               "relativeBar":0,
+               "volume":{
+                  "name":"Volume",
+                  "value":1,
+                  "values":[
+                     1
+                  ]
+               },
+               "velocity":{
+                  "name":"Velocity",
+                  "value":0.8,
+                  "values":[
+                     0.8,
+                     0.5,
+                     0.75
+                  ]
+               },
+               "dry":{
+                  "name":"Dry",
+                  "value":0,
+                  "values":[
+                     0
+                  ]
+               },
+               "wet":{
+                  "name":"Wet",
+                  "value":0,
+                  "values":[
+                     0,
+                     0.5,
+                     0.7,
+                     0.8
+                  ]
+               },
+               "metaData":null,
+               "metaAutomation":null
+            }
+         ],
+         "title":"Chorus",
+         "bar":0
+      }
+   ]
+}
+```
+
+### XML Result:
+
+```
+<Song name="My song">
+    <SongPart title="Chorus" bar="0">
+        <SongTrack name="" bar="0" relativeBar="0">
+            <SongSequence note="eFlat" bar="10" octave="5">
+                <SequenceEntry length="2" />
+                <SequenceEntry length="4" />
+                <SequenceEntry length="8" />
+                <SequenceEntry length="18" />
+            </SongSequence>
+            <SongAutomation name="Volume" value="1">
+                <SongAutomationValue>1</SongAutomationValue>
+            </SongAutomation>
+            <SongAutomation name="Velocity" value="0.6">
+                <SongAutomationValue>0.6</SongAutomationValue>
+            </SongAutomation>
+            <SongAutomation name="Dry" value="0">
+                <SongAutomationValue>0</SongAutomationValue>
+            </SongAutomation>
+            <SongAutomation name="Wet" value="0">
+                <SongAutomationValue>0</SongAutomationValue>
+                <SongAutomationValue>0.7</SongAutomationValue>
+                <SongAutomationValue>0.75</SongAutomationValue>
+            </SongAutomation>
+            <SongMetaData>
+                <SongMetaDataEntry key="bpm" value="140" />
+            </SongMetaData>
+            <SongMetaAutomation>
+                <SongAutomation name="bpm" value="0.5">
+                    <SongAutomationValue>0.5</SongAutomationValue>
+                </SongAutomation>
+            </SongMetaAutomation>
+        </SongTrack>
+        <SongTrack name="" bar="0" relativeBar="0">
+            <SongSequence note="eFlat" bar="10" octave="5">
+                <SequenceEntry length="2" />
+                <SequenceEntry length="4" />
+                <SequenceEntry length="8" />
+                <SequenceEntry length="18" />
+            </SongSequence>
+            <SongAutomation name="Volume" value="1">
+                <SongAutomationValue>1</SongAutomationValue>
+            </SongAutomation>
+            <SongAutomation name="Velocity" value="0.6">
+                <SongAutomationValue>0.6</SongAutomationValue>
+            </SongAutomation>
+            <SongAutomation name="Dry" value="0">
+                <SongAutomationValue>0</SongAutomationValue>
+            </SongAutomation>
+            <SongAutomation name="Wet" value="0">
+                <SongAutomationValue>0</SongAutomationValue>
+                <SongAutomationValue>0.7</SongAutomationValue>
+                <SongAutomationValue>0.75</SongAutomationValue>
+            </SongAutomation>
+            <SongMetaData>
+                <SongMetaDataEntry key="bpm" value="140" />
+            </SongMetaData>
+            <SongMetaAutomation>
+                <SongAutomation name="bpm" value="0.5">
+                    <SongAutomationValue>0.5</SongAutomationValue>
+                </SongAutomation>
+            </SongMetaAutomation>
+        </SongTrack>
+        <SongTrack name="" bar="0" relativeBar="0">
+            <SongSequence note="eFlat" bar="10" octave="5">
+                <SequenceEntry length="2" />
+                <SequenceEntry length="4" />
+                <SequenceEntry length="8" />
+                <SequenceEntry length="18" />
+            </SongSequence>
+            <SongAutomation name="Volume" value="1">
+                <SongAutomationValue>1</SongAutomationValue>
+            </SongAutomation>
+            <SongAutomation name="Velocity" value="0.6">
+                <SongAutomationValue>0.6</SongAutomationValue>
+            </SongAutomation>
+            <SongAutomation name="Dry" value="0">
+                <SongAutomationValue>0</SongAutomationValue>
+            </SongAutomation>
+            <SongAutomation name="Wet" value="0">
+                <SongAutomationValue>0</SongAutomationValue>
+                <SongAutomationValue>0.7</SongAutomationValue>
+                <SongAutomationValue>0.75</SongAutomationValue>
+            </SongAutomation>
+            <SongMetaData>
+                <SongMetaDataEntry key="bpm" value="140" />
+            </SongMetaData>
+            <SongMetaAutomation>
+                <SongAutomation name="bpm" value="0.5">
+                    <SongAutomationValue>0.5</SongAutomationValue>
+                </SongAutomation>
+            </SongMetaAutomation>
+        </SongTrack>
+        <SongTrack name="Strings" bar="0" relativeBar="0">
+            <SongChord bar="4" positiveHarmonics="1" negativeHarmonics="1">
+                <SongChordEntry length="16" bar="6">
+                    <SongNotes>
+                        <SongNote note="A" length="16" step="0" relativeStep="192" octave="5" bar="6" />
+                        <SongNote note="E" length="16" step="8" relativeStep="200" octave="5" bar="6" />
+                        <SongNote note="C#" length="16" step="16" relativeStep="208" octave="5" bar="6" />
+                        <SongNote note="B" length="16" step="24" relativeStep="216" octave="4" bar="6" />
+                    </SongNotes>
+                    <Scales>
+                        <MusicalScale scale="aMajor" note="a" type="major">
+                            <ScaleNotes>
+                                <ScaleNote note="A" octaveIncrementer="0" />
+                                <ScaleNote note="B" octaveIncrementer="0" />
+                                <ScaleNote note="C#" octaveIncrementer="1" />
+                                <ScaleNote note="D" octaveIncrementer="1" />
+                                <ScaleNote note="E" octaveIncrementer="1" />
+                                <ScaleNote note="F#" octaveIncrementer="1" />
+                                <ScaleNote note="G#" octaveIncrementer="1" />
+                            </ScaleNotes>
+                        </MusicalScale>
+                        <MusicalScale scale="aMinor" note="a" type="minor">
+                            <ScaleNotes>
+                                <ScaleNote note="A" octaveIncrementer="0" />
+                                <ScaleNote note="B" octaveIncrementer="0" />
+                                <ScaleNote note="C" octaveIncrementer="0" />
+                                <ScaleNote note="D" octaveIncrementer="0" />
+                                <ScaleNote note="E" octaveIncrementer="0" />
+                                <ScaleNote note="F" octaveIncrementer="0" />
+                                <ScaleNote note="G" octaveIncrementer="0" />
+                            </ScaleNotes>
+                        </MusicalScale>
+                    </Scales>
+                </SongChordEntry>
+            </SongChord>
+            <SongAutomation name="Volume" value="1">
+                <SongAutomationValue>1</SongAutomationValue>
+            </SongAutomation>
+            <SongAutomation name="Velocity" value="0.8">
+                <SongAutomationValue>0.8</SongAutomationValue>
+                <SongAutomationValue>0.5</SongAutomationValue>
+                <SongAutomationValue>0.75</SongAutomationValue>
+            </SongAutomation>
+            <SongAutomation name="Dry" value="0">
+                <SongAutomationValue>0</SongAutomationValue>
+            </SongAutomation>
+            <SongAutomation name="Wet" value="0">
+                <SongAutomationValue>0</SongAutomationValue>
+                <SongAutomationValue>0.5</SongAutomationValue>
+                <SongAutomationValue>0.7</SongAutomationValue>
+                <SongAutomationValue>0.8</SongAutomationValue>
+            </SongAutomation>
+        </SongTrack>
+    </SongPart>
+</Song>
+```
+
 ## Example Usage (Analyzation)
 
 Most classes and certain types implements **toJson()** and **toXml()** that will convert them into json and xml strings that can be used to export data etc.
