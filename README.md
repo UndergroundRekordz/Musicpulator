@@ -18,6 +18,10 @@ https://cooldown.io/blogs/entry/2-using-artificial-intelligence-to-create-beauti
 
 https://cooldown.io/blogs/entry/3-using-artificial-intelligence-to-create-beautiful-music-part-2/
 
+## Documentation
+
+API: https://musicpulator.dpldocs.info/musicpulator.html
+
 ## Installation
 
 Musicpulator is available using DUB.
