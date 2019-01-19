@@ -519,4 +519,373 @@ auto progression = getProgression(directions);
 
 ## Example Usage (Manipulation)
 
-Coming soon ...
+At the moment there is no way to automatically convert music into song objects, but in the future there will be support for such automation.
+
+That means right now you have to manually construct your song objects.
+
+### Creating a new sequence (SongSequence)
+
+```
+const bar = 4;
+const octave = 5;
+const sequenceEntries[2,2,2,2];
+
+auto sequence = new SongSequence(MusicalNote.note, bar, octave, sequenceEntries);
+```
+
+## Add an entry to a sequence (SongSequence)
+
+```
+sequence.addEntry(4);
+```
+
+### Creating a new song note (SongNote)
+
+```
+const length = 4;
+const step = 0;
+const octave = 6;
+const bar = 0;
+
+auto note = new SongNote(MusicalNote.gFlat, length, step, octave, bar);
+
+...
+
+auto note = new SongNote(MusicalNote.c, step, octave, chordEntry);
+```
+
+### Converting a song note a flat note (SongNote)
+
+```
+note.convertToFlat();
+```
+
+### Converting a song note to a flat note (SongNote)
+
+```
+note.convertFromFlat();
+```
+
+### Creating a new melody (SongMelody)
+
+```
+auto notes = [note1, note2, note3];
+
+auto melody = new SongMelody(notes);
+
+...
+
+auto melody = new SongMelody;
+```
+
+### Append a note to the melody
+
+```
+melody.appendNote(note);
+```
+
+### Convert all notes to flat
+
+```
+melody.convertToFlat();
+```
+
+### Convert all notes from flat
+
+```
+melody.convertFromFlat();
+```
+
+### Creating a new chord (SongChord)
+
+```
+auto entries = [chordEntry1, chordEntry2, chordEntry3, chordEntry4];
+
+const bar = 5;
+
+auto chord = new SongChord(entries, bar);
+
+...
+
+const positiveHarmonics = 1;
+
+auto chord = new SongChord(entries, bar, positiveHarmonics);
+
+...
+
+const negativeHarmonics = 1;
+
+auto chord = new SongChord(entries, bar, positiveHarmonics, negativeHarmonics);
+```
+
+### Add a chord entry to a chord (SongChord)
+
+```
+chord.addChordEntry(chordEntry);
+```
+
+### Creating a new chord entry (SongChordEntry)
+
+```
+const length = 16;
+const bar = 0;
+
+auto chordEntry = new SongChordEntry(length, bar);
+
+...
+
+auto chordEntry = new SongChordEntry(length, bar, chord);
+
+...
+
+auto notes = [note1, note2, note3];
+
+auto chordEntry = new SongChordEntry(length, bar, notes);
+
+...
+
+auto chordEntry = new SongChordEntry(length, bar, notes, chord);
+```
+
+### Set the length of a chord entry (SongChordEntry)
+
+The length will always be relative to the maximum size left based on all other chord entry lengths.
+
+Which means the maximum size is 32, but if there are an entry with a length of 16 already then the length will be 16 even if set higher.
+
+This makes sure that it creates accurate music.
+
+```
+chordEntry.length = 32;
+```
+
+### Set the bar of a chord entry (SongChordEntry)
+
+```
+chordEntry.bar = 4;
+```
+
+### Add a song note to a chord entry (SongChordEntry)
+
+```
+chordEntry.addNote(note);
+```
+
+### Convert all notes in the entry to flat (SongChordEntry)
+
+```
+chordEntry.convertToFlat();
+```
+
+### Convert all notes in the entry from flat (SongChordEntry)
+
+```
+chordEntry.convertFromFlat();
+```
+
+### Creating a new track (SongTrack)
+
+```
+auto track = new SongTrack(chord);
+
+...
+
+auto track = new SongTrack(melody);
+
+...
+
+auto track = new SongTrack(sequence);
+```
+
+### Set the chord, melody or sequence of a track (SongTrack)
+
+This will erase all data that the track holds and replace it with the new data!
+
+```
+track.chord = chord;
+
+...
+
+track.melody = melody;
+
+...
+
+track.sequence = sequence;
+```
+
+### Set the name of a track (SongTrack)
+
+```
+track.name = "Strings";
+
+...
+
+track.name = "Kicks"
+```
+
+### Set the bar of a track (SongTrack)
+
+```
+track.bar = 4;
+```
+
+### Set the volume (Or other automation) of a track (SongTrack)
+
+This also works for:
+
+* track.velocity
+* track.dry
+* track.wet
+* Any meta automation added to the track
+
+```
+track.volume.value = 0.65;
+
+...
+
+track.volume.addValue(0.75);
+track.volume.addValue(0.7);
+track.volume.addValue(0.65);
+
+...
+
+const automationPoint = 2;
+
+track.volume.modifyValue(0.65, automationPoint);
+```
+
+### Creating a new automation clip (SongAutomation)
+
+```
+auto automation = new SongAutomation("My Automation Clip");
+
+...
+
+const initialValue = 0.8;
+
+auto automation = new SongAutomation("My Automation Clip", initialValue);
+```
+
+### Set the value/values of an automation clip (SongAutomation)
+
+```
+automation.value = 0.65;
+
+...
+
+automation.addValue(0.75);
+automation.addValue(0.7);
+automation.addValue(0.65);
+
+...
+
+const automationPoint = 2;
+
+automation.modifyValue(0.65, automationPoint);
+```
+
+### Creating a new part (SongPart)
+
+```
+auto part = new SongPart(SongPartTitle.chorus);
+```
+
+### Set the bar of a part (SongPart)
+
+```
+part.bar = 8;
+```
+
+### Add a track to a part (SongPart)
+
+```
+part.addTrack(track);
+```
+
+### Creating a new song (Song)
+
+```
+auto song = new Song("Super Artist - Super Song");
+```
+
+### Add a part to a song (Song)
+
+```
+song.addPart(part);
+```
+
+### Creating a new musical scale (MusicalScale)
+
+```
+auto scale = new MusicalScale(MusicalScaleName.cMajor, MusicalNote.c, MusicalScaleType.major);
+```
+
+### Creating a new musical scale note (MusicalScaleNote)
+
+```
+auto scaleNote = new MusicalScaleNote(MusicalNote.c);
+
+...
+
+const octaveIncrementer = 1;
+
+auto scaleNote = new MusicalScaleNote(MusicalNote.c, octaveIncrementer);
+```
+
+### Convert a note into a flat note
+
+Not all notes have a relative flat note since it only gives flat notes that are part of a proper scale.
+
+This also works with SongNote.
+
+```
+auto flatNote = convertToFlatNote(MusicalNote.g);
+// flatNote is gFlat
+
+auto sameNote = convertToFlatNote(MusicalNote.f);
+// sameNote is f
+```
+
+### Convert a flat note into a natural note
+
+This also works with SongNote.
+
+```
+auto note = convertFromFlatNote(MusicalNote.dFlat);
+// note is cSharp
+
+auto sameNote = convertFromFlatNote(MusicalNote.a);
+// sameNote is a
+```
+
+### Translate (Convert) a set of notes into flat notes
+
+This also works with SongNote.
+
+```
+auto flatNotes = translateToFlatNotes([MusicalNote.cSharp, MusicalNote.e, MusicalNote.gSharp]);
+// flatNotes is [dFlat, e, aFlat]
+```
+
+### Translate (Convert) a set of notes from flat notes
+
+This also works with SongNote.
+
+```
+auto notes = translateFromFlatNotes([MusicalNote.eFlat, MusicalNote.gFlat, MusicalNote.cFlat]);
+// notes is [dSharp, fSharp, b];
+```
+
+### Translate scale note to natural note
+
+```
+auto note = translateToNaturalNote(scaleNote);
+```
+
+### Translate a set of scale notes to natural notes
+
+```
+auto scaleNotes = [scaleNote1, scaleNote2, scaleNote3];
+
+auto naturalNotes = translateToNaturalNotes(scaleNotes);
+```
